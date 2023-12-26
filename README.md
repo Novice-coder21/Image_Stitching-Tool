@@ -14,6 +14,7 @@ A unique software tool that allows you to create panoramas by attaching images w
 * Create and exe file and place accordingly. Use the exe to run the program.
 * The program will then create a folder named build which then runs the code.
 * Update the paths according to your image locations.
+* For steps on how to do this follow this [video](https://www.youtube.com/watch?v=m9HBM1m_EMU)
 
 ## Main Procedure
 1. Image **feature extraction** with `SIFT` algorithm
@@ -24,7 +25,13 @@ A unique software tool that allows you to create panoramas by attaching images w
 > relevant code: `MySift.h` and `MySift.cpp`
 - results of key feature points (each with a feature descriptor of 128 dimention) of two images:
 
-![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/kps.png)
+<div style="position: relative;">
+  <img src="https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/kps.png" alt="Original Image" style="width:100%;">
+  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    <img src="https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/Watermark.jpg" alt="Watermark" style="opacity: 0.5; width: 30%;">
+  </div>
+</div>
+
 
 #### Image feature points **matching** with `RANSAC` algorithm
 > relevant code: `MyMatching.h` and `MyMatching.cpp`
