@@ -24,7 +24,7 @@ A unique software tool that allows you to create panoramas by attaching images w
 
 ![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/kps.png)
 
-#### 2) Image feature points **matching** with `RANSAC` algorithm
+#### Image feature points **matching** with `RANSAC` algorithm
 > relevant code: `MyMatching.h` and `MyMatching.cpp`
 - First do a *coarse-grained* feature points matching by calculating the distance of two feature descriptors, and regard the two points as matched if the distance is lower than some threshold. The matched points are lined together as shown below:
 
@@ -40,4 +40,24 @@ A unique software tool that allows you to create panoramas by attaching images w
 
 ![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/mixImgWithLine_fixed.png)
 
+#### Image **blending** with matched feature points
+> relevant code: `MyBlending.h` and `MyBlending.cpp`
+- First use a simple translation method:
 
+![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/mixImg.png)
+
+becomes
+
+![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/blended.png)
+
+- Then apply a RGB interpolation at fusion region `A/B`:
+
+![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/blend.png)
+
+- Stitched Result of two images
+
+![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/blendedImg.png)
+
+- Repeat this procedure and get the stitched Result of all images
+
+![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/blendedImg0.png)
