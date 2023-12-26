@@ -1,1 +1,1 @@
-
+Download the files and then add the entire folder to your compiler via the "add folder" option in either VS code or Visual Studio and then build via CMake.
