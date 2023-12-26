@@ -12,6 +12,7 @@ A unique software tool that allows you to create panoramas by attaching images w
 * Download the required libraries and link them to your compilers and IDEs.
 * Using CMake make a CMakelists.txt file that configures the local build files.
 * Create and exe file and place accordingly. Use the exe to run the program.
+* The program will then create a folder named build which then runs the code.
 
 ## Main Procedure
 1. Image **feature extraction** with `SIFT` algorithm
