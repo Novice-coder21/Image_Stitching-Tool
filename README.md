@@ -4,7 +4,7 @@ A unique software tool that allows you to create panoramas by attaching images w
 ## Software required
 * An IDE such as VS code or Visual Studio
 * A C++ compiler (MS VC is optimum)
-* CMake[https://cmake.org/download/]
+* !CMake(https://cmake.org/download/)
 * OpenCV library version 3.2.0 : https://opencv.org/releases/page/6/
 * CImg library : http://www.cimg.eu/
 
