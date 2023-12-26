@@ -25,13 +25,7 @@ A unique software tool that allows you to create panoramas by attaching images w
 > relevant code: `MySift.h` and `MySift.cpp`
 - results of key feature points (each with a feature descriptor of 128 dimention) of two images:
 
-<div style="position: relative;">
-  <img src="https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/kps.png" alt="Original Image" style="width:100%;">
-  <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-    <img src="https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/Watermark.jpg" alt="Watermark" style="opacity: 0.5; width: 30%;">
-  </div>
-</div>
-
+![Image text](https://github.com/Novice-coder21/Image_Stitching-Tool/blob/main/Images/kps.png)
 
 #### Image feature points **matching** with `RANSAC` algorithm
 > relevant code: `MyMatching.h` and `MyMatching.cpp`
