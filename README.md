@@ -14,7 +14,7 @@ A unique software tool that allows you to create panoramas by attaching images w
 * Create and exe file and place accordingly. Use the exe to run the program.
 * The program will then create a folder named build which then runs the code.
 * Update the paths according to your image locations.
-* For steps on how to do this follow this [video](https://www.youtube.com/watch?v=m9HBM1m_EMU)
+* For steps on how to do this follow this [video](https://www.youtube.com/watch?v=m9HBM1m_EMU).
 
 ## Main Procedure
 1. Image **feature extraction** with `SIFT` algorithm
