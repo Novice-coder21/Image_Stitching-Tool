@@ -1,9 +1,15 @@
 #include "MyMatching.h"
+#include <cstdlib>
+#include <windows.h>
 
 MyMatching::MyMatching() {
 }
 
 MyMatching::~MyMatching() {
+}
+
+void MessageBox(const char* errorMessage) {
+    MessageBox(nullptr, errorMessage, "Insufficiency Error", MB_ICONWARNING);
 }
 
 MyMatching::MyMatching(int _kp_count_A, Keypoint _firstKeyDesc_A, int _kp_count_B, Keypoint _firstKeyDesc_B) {
@@ -137,48 +143,56 @@ void MyMatching::myRANSACtoFindKpTransAndDrawOut(char* _filename) {
 	int maxInliers = 0;
 	int maxIndex = -1;
 	int inliersCount;
+	if 	(matchedPairSet.size() < 3){
+		MessageBox("Error : Insufficent matched pairs for RANSAC. Atleast 5 pairs are required");
+		Sleep(3000);
+		exit(EXIT_FAILURE);
+	}
+	else{
+		for (int i = 0; i < matchedPairSet.size(); i++) {
+			inliersCount = 0;
+			int xa = matchedPairSet[i].keyPointA.col;
+			int ya = matchedPairSet[i].keyPointA.row;
 
-	for (int i = 0; i < matchedPairSet.size(); i++) {
-		inliersCount = 0;
-		int xa = matchedPairSet[i].keyPointA.col;
-		int ya = matchedPairSet[i].keyPointA.row;
+			int xb = matchedPairSet[i].keyPointB.col + srcImgA._width;
+			int yb = matchedPairSet[i].keyPointB.row;
 
-		int xb = matchedPairSet[i].keyPointB.col + srcImgA._width;
-		int yb = matchedPairSet[i].keyPointB.row;
+			int deltaX = xb - xa;
+			int deltaY = yb - ya;
 
-		int deltaX = xb - xa;
-		int deltaY = yb - ya;
+			for (int j = 0; j < matchedPairSet.size(); j++) {
+				if (j != i) {
+					int txa = matchedPairSet[j].keyPointA.col;
+					int tya = matchedPairSet[j].keyPointA.row;
 
-		for (int j = 0; j < matchedPairSet.size(); j++) {
-			if (j != i) {
-				int txa = matchedPairSet[j].keyPointA.col;
-				int tya = matchedPairSet[j].keyPointA.row;
+					int txb = matchedPairSet[j].keyPointB.col + srcImgA._width;
+					int tyb = matchedPairSet[j].keyPointB.row;
 
-				int txb = matchedPairSet[j].keyPointB.col + srcImgA._width;
-				int tyb = matchedPairSet[j].keyPointB.row;
+					int tdeltaX = txb - txa;
+					int tdeltaY = tyb - tya;
 
-				int tdeltaX = txb - txa;
-				int tdeltaY = tyb - tya;
+					int vectorGap = (tdeltaX - deltaX) * (tdeltaX - deltaX) + (tdeltaY - deltaY) * (tdeltaY - deltaY);
+					//cout << "i: " << i << ", j: " << j << "  vectorGap: " << vectorGap << endl;
 
-				int vectorGap = (tdeltaX - deltaX) * (tdeltaX - deltaX) + (tdeltaY - deltaY) * (tdeltaY - deltaY);
-				//cout << "i: " << i << ", j: " << j << "  vectorGap: " << vectorGap << endl;
-
-				if (vectorGap < InliersGap) {
-					inliersCount++;
+					if (vectorGap < InliersGap) {
+						inliersCount++;
+					}
 				}
 			}
-		}
-		if (inliersCount > maxInliers) {
-			maxInliers = inliersCount;
-			maxIndex = i;
-		}
+			if (inliersCount > maxInliers) {
+				maxInliers = inliersCount;
+				maxIndex = i;
+			}
+			if (maxInliers < 3) {
+        		MessageBox("Error: Insufficient inliers after RANSAC. Images cannot be stitched together.");
+        		Sleep(3000);
+				exit(EXIT_FAILURE);
+    }
+			cout << "maxIndex: " << maxIndex << ", maxInliers: " << maxInliers << endl;
+			drawRealKeypointOnImg(_filename, maxIndex);	
+			}
 	}
-
-	cout << "maxIndex: " << maxIndex << ", maxInliers: " << maxInliers << endl;
-
-	drawRealKeypointOnImg(_filename, maxIndex);
 }
-
 
 void MyMatching::drawRealKeypointOnImg(char* _filename, int maxIndex) {
 	fixedMatchedImg = CImg<int>(srcImgA._width + srcImgB._width, srcImgA._height, 1, 3, 0);
