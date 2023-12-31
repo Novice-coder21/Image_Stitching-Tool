@@ -88,9 +88,9 @@ void MyMatching::drawOriKeypointOnImg(char* _filenameA, char* _filenameB, char* 
 		srcImgWithKpA.draw_circle(matchedPairSet[i].keyPointA.col, matchedPairSet[i].keyPointA.row, 3, yellow, 1.0f);
 		srcImgWithKpB.draw_circle(matchedPairSet[i].keyPointB.col, matchedPairSet[i].keyPointB.row, 3, yellow, 1.0f);
 	}
-	srcImgWithKpA.display("srcImgWithKpA");
+	//srcImgWithKpA.display("srcImgWithKpA");
 	//srcImgWithKpA.save(_saveAddrA);
-	srcImgWithKpB.display("srcImgWithKpB");
+	//srcImgWithKpB.display("srcImgWithKpB");
 	//srcImgWithKpB.save(_saveAddrB);
 
 }
@@ -123,7 +123,7 @@ void MyMatching::mixImageAndDrawPairLine(char* mixImgAddr, char* mixImgWithLineA
 			}
 		}
 	}
-	mixImg.display("mixImg");
+	//mixImg.display("mixImg");
 	//mixImg.save(mixImgAddr);
 
 	const double blue[] = { 0, 255, 255 };
@@ -136,7 +136,7 @@ void MyMatching::mixImageAndDrawPairLine(char* mixImgAddr, char* mixImgWithLineA
 
 		mixImg.draw_line(xa, ya, xb, yb, blue);
 	}
-	mixImg.display("mixImgWithLine");
+	//mixImg.display("mixImgWithLine");
 	}
 
 void MyMatching::myRANSACtoFindKpTransAndDrawOut(char* _filename) {
@@ -183,16 +183,16 @@ void MyMatching::myRANSACtoFindKpTransAndDrawOut(char* _filename) {
 				maxInliers = inliersCount;
 				maxIndex = i;
 			}
-			if (maxInliers < 3) {
-        		MessageBox("Error: Insufficient inliers after RANSAC. Images cannot be stitched together.");
-        		Sleep(3000);
-				exit(EXIT_FAILURE);
+			if (maxInliers < 0){
+			MessageBox("Error : Insufficent inliers, images failed to stitch together.");
+			Sleep(3000);
+			exit(EXIT_FAILURE);
+			}
     }
 			cout << "maxIndex: " << maxIndex << ", maxInliers: " << maxInliers << endl;
 			drawRealKeypointOnImg(_filename, maxIndex);	
 			}
 	}
-}
 
 void MyMatching::drawRealKeypointOnImg(char* _filename, int maxIndex) {
 	fixedMatchedImg = CImg<int>(srcImgA._width + srcImgB._width, srcImgA._height, 1, 3, 0);
@@ -253,7 +253,7 @@ void MyMatching::drawRealKeypointOnImg(char* _filename, int maxIndex) {
 		}
 	}
 
-	fixedMatchedImg.display("mixImgWithLine_fixed");
+	fixedMatchedImg.display("Post_RANSAC lines fixed Image");
 	//fixedMatchedImg.save(_filename);
 }
 
