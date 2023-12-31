@@ -904,7 +904,7 @@ void MySift::ExtractFeatureDescriptors(int numoctaves, ImageOctaves *GaussianPyr
 			/*
 			0   1   0
 			1   *   1
-			0   1   0   �����ֵ������ͼʾ
+			0   1   0  
 			*/
 			float sample12 = getPixelBI(((GaussianPyr[p->octave].Octave)[p->level]).Level, x_sample, y_sample - 1);
 			float sample21 = getPixelBI(((GaussianPyr[p->octave].Octave)[p->level]).Level, x_sample - 1, y_sample);
@@ -1078,8 +1078,8 @@ void MySift::SiftMainProcess() {
 	cvConvertScaleAbs(mosaicVertical1, mosaic1, 1, 0);
 
 	//cvSaveImage("GaussianPyramid of me.jpg",mosaic1);  
-	cvNamedWindow("mosaic1", 1);
-	cvShowImage("mosaic1", mosaic1);
+	//cvNamedWindow("mosaic1", 1);
+	//cvShowImage("mosaic1", mosaic1);
 	cvWaitKey(0);
 	cvDestroyWindow("mosaic1");
 	
@@ -1119,27 +1119,27 @@ void MySift::SiftMainProcess() {
 	cvConvertScaleAbs(mosaicVertical1, mosaic2, 1, 0);
 
 	//cvSaveImage("DOGPyramid of me.jpg",mosaic2);  
-	cvNamedWindow("mosaic1", 1);
-	cvShowImage("mosaic1", mosaic2);
+	//cvNamedWindow("mosaic1", 1);
+	//cvShowImage("mosaic1", mosaic2);
 	cvWaitKey(0);
 
 	int keycount = DetectKeypoint(numoctaves, Gaussianpyr);
 	printf("the keypoints number are %d ;\n", keycount);
 	cvCopy(src, image_kp, NULL);
-	DisplayKeypointLocation(image_kp, Gaussianpyr);
+	//DisplayKeypointLocation(image_kp, Gaussianpyr);
 
-	cvNamedWindow("image_kp", 1);
-	cvShowImage("image_kp", image_kp);
+	//cvNamedWindow("image_kp", 1);
+	//cvShowImage("image_kp", image_kp);
 	cvWaitKey(0);
 	cvDestroyWindow("image_kp");
 
 	ComputeGrad_DirecandMag(numoctaves, Gaussianpyr);
 	AssignTheMainOrientation(numoctaves, Gaussianpyr, mag_pyr, grad_pyr);
 	cvCopy(src, image_featDir, NULL);
-	DisplayOrientation(image_featDir, Gaussianpyr);
+	//DisplayOrientation(image_featDir, Gaussianpyr);
 
-	cvNamedWindow("image_featDir", 1);
-	cvShowImage("image_featDir", image_featDir);
+	cvNamedWindow("Input Image", 1);
+	cvShowImage("Input Image", image_featDir);
 	cvWaitKey(0);
 
 	ExtractFeatureDescriptors(numoctaves, Gaussianpyr);
