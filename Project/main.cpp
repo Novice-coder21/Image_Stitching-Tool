@@ -2,22 +2,25 @@
 #include "MyMatching.h"
 #include "MyBlending.h"
 
+/* function to convert file types to bmp.
+or make other types sucn as .png .jpg .jpeg */
 
+void Success(const char* success_message) {
+     MessageBox(nullptr, success_message, "Successful Stitching", MB_ICONINFORMATION);
+}
 
 struct ImageInfo {
     char* path;
 };
 
-int main() {
+int main(){
     // Create a vector to store information for each image
-    vector<ImageInfo> imageList;
-
+    vector <ImageInfo> imageList;
     // Add information for each input image
     imageList.push_back({ "C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Inputs\\1.bmp"});
     imageList.push_back({ "C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Inputs\\2.bmp"});
     imageList.push_back({ "C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Inputs\\3.bmp"});
     // Add more images as needed
-
     char* resultaddr = "C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Outputs\\result.bmp";
     char* x;
     char* y;
@@ -52,7 +55,7 @@ int main() {
         }
 
     MyMatching myMatching(mySift1.getKeyPointsCount(), mySift1.getFirstKeyDescriptors(),
-        mySift2.getKeyPointsCount(), mySift2.getFirstKeyDescriptors());
+    mySift2.getKeyPointsCount(), mySift2.getFirstKeyDescriptors());
     myMatching.featureMatchMainProcess();
     myMatching.drawOriKeypointOnImg(x , y,"C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Outputs\\1-2\\1_kp_real.bmp", "C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Outputs\\1-2\\2_kp_real.bmp");
     myMatching.mixImageAndDrawPairLine("C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Outputs\\1-2/mixImg.bmp", "C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Outputs\\1-2\\mixImgWithLine.bmp");
@@ -62,6 +65,6 @@ int main() {
     myBlending.blendingMainProcess(x, y);
     myBlending.saveBlendedImg("C:\\Users\\PMLS\\Desktop\\OOP_Project_Images\\Outputs\\result.bmp");
     }
-
-return 0;
-}
+    Success("Image Stitched together successfully and saved at provided location.");
+    return 0;
+    }
